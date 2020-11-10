@@ -1,0 +1,14 @@
+[Unit]
+Description=webapplication1
+
+[Service]
+WorkingDirectory=#{Octopus.Action[deploy web site].Output.Package.InstallationDirectoryPath}
+ExecStart=/usr/share/dotnet/dotnet "#{Octopus.Action[deploy web site].Output.Package.InstallationDirectoryPath}/WebApplication1.dll"
+Restart=always
+RestartSec=10
+User=ubuntu
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+[Install]
+WantedBy=multi-user.target
